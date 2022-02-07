@@ -5,23 +5,24 @@ class LoginApiClient {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
 // Retorna usuário logado
-  Stream<User> get onAuthStateChanged => _firebaseAuth.onAuthStateChanged
-      .map((FirebaseUser currentUser) => User.fromSnapshot(currentUser));
+  Stream<UserModel> get onAuthStateChanged =>
+      _firebaseAuth.onAuthStateChanged.map((FirebaseUser currentUserModel) =>
+          UserModel.fromSnapshot(currentUserModel));
 
 // Criar usuário
-  Future<User> createUserWithEmailAndPassword(
+  Future<UserModel> createUserModelWithEmailAndPassword(
       String email, String password, String name) async {
     try {
-      final currentUser = (await _firebaseAuth.createUserWithEmailAndPassword(
-              email: email, password: password))
+      final currentUserModel = (await _firebaseAuth
+              .createUserWithEmailAndPassword(email: email, password: password))
           .user;
       //Atualizando o nome do usuário
-      var userUpdateInfo = UserUpdateInfo();
-      userUpdateInfo.displayName = name;
-      await currentUser.updateProfile(UserUpdateInfo());
-      await currentUser.reload();
+      var UserModelUpdateInfo = UserUpdateInfo();
+      UserModelUpdateInfo.displayName = name;
+      await currentUserModel.updateProfile(UserUpdateInfo());
+      await currentUserModel.reload();
 
-      return User.fromSnapshot(currentUser);
+      return UserModel.fromSnapshot(currentUserModel);
     } catch (e) {
       print(e);
       return null;
@@ -29,13 +30,14 @@ class LoginApiClient {
   }
 
 // Fazer login
-  Future<User> signInWithEmailAndPassword(String email, String password) async {
+  Future<UserModel> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
-      final currentUser = (await _firebaseAuth.signInWithEmailAndPassword(
+      final currentUserModel = (await _firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
           .user;
 
-      return User.fromSnapshot(currentUser);
+      return UserModel.fromSnapshot(currentUserModel);
     } catch (e) {
       print(e);
       return null;
