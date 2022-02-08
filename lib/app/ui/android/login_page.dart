@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:login_firebase/app/controller/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
+  final LoginController _loginController = Get.find<LoginController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +24,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 48.0),
             TextFormField(
+              controller: _loginController.emailTextController,
               keyboardType: TextInputType.emailAddress,
               // initialValue: 'emailteste@gmail.com',
               decoration: InputDecoration(
@@ -34,6 +38,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 8.0),
             TextFormField(
+              controller: _loginController.passwordTextController,
               //initialValue: 'emailteste@gmail.com',
               obscureText: true,
               decoration: InputDecoration(
@@ -65,6 +70,13 @@ class LoginPage extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'Esqueceu sua senha?',
+                style: TextStyle(color: Get.theme.primaryColor),
+              ),
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Text(
+                'Cadastrar-se',
                 style: TextStyle(color: Get.theme.primaryColor),
               ),
             ),
