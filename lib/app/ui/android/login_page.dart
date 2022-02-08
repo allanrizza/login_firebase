@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_firebase/app/controller/login_controller.dart';
+import 'package:login_firebase/app/routes/app_routes.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginController _loginController = Get.find<LoginController>();
@@ -74,7 +75,9 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.REGISTER);
+              },
               child: Text(
                 'Cadastrar-se',
                 style: TextStyle(color: Get.theme.primaryColor),
