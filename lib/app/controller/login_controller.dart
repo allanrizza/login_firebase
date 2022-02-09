@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_firebase/app/data/model/user_model.dart';
 import 'package:login_firebase/app/data/repository/login_repository.dart';
@@ -12,6 +13,8 @@ class LoginController extends GetxController {
   final TextEditingController nameTextController = TextEditingController();
 
   void register() async {
+    Get.dialog(Center(child: CircularProgressIndicator()),
+        barrierDismissible: false);
     UserModel user = await repository.createUserWithEmailAndPassword(
         emailTextController.text,
         passwordTextController.text,
@@ -23,6 +26,9 @@ class LoginController extends GetxController {
   }
 
   void login() async {
+    Get.dialog(Center(child: CircularProgressIndicator()),
+        barrierDismissible: false);
+
     UserModel user = await repository.signInWithEmailAndPassword(
         emailTextController.text, passwordTextController.text);
 
