@@ -19,12 +19,26 @@ class LoginApiClient {
               .createUserWithEmailAndPassword(email: email, password: password))
           .user;
       //Atualizando o nome do usuário
+
+      var user = _firebaseAuth.currentUser();
+
       var UserModelUpdateInfo = UserUpdateInfo();
       UserModelUpdateInfo.displayName = name;
-      await currentUserModel.updateProfile(UserUpdateInfo());
+      await currentUserModel.updateProfile(UserModelUpdateInfo);
+      await currentUserModel.reload();
+      return UserModel.fromSnapshot(currentUserModel);
+
+/*
+
+      UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+      userUpdateInfo.displayName = name;
+      await user.updateProfile(userUpdateInfo);
       await currentUserModel.reload();
 
+
       return UserModel.fromSnapshot(currentUserModel);
+*/
+
     } catch (e) {
       print(e.code);
       Get.back();
@@ -66,7 +80,6 @@ class LoginApiClient {
       final currentUserModel = (await _firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
           .user;
-
       return UserModel.fromSnapshot(currentUserModel);
     } catch (e) {
       print(e.code);
@@ -101,7 +114,6 @@ class LoginApiClient {
           Get.defaultDialog(title: "ERROR", content: Text("$e"));
           break;
       }
-      return null;
     }
   }
 

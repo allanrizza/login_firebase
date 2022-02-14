@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:login_firebase/app/bindings/home_binding.dart';
 import 'package:login_firebase/app/bindings/login_binding.dart';
 import 'package:login_firebase/app/ui/android/home_page.dart';
 import 'package:login_firebase/app/ui/android/initial_page.dart';
@@ -25,6 +26,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomePage(),
+      binding: HomeBinding(),
     ),
   ];
 }

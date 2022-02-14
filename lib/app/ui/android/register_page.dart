@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
                   }
                   return null;
                 },
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.text,
                 // initialValue: 'emailteste@gmail.com',
                 decoration: InputDecoration(
                   hintText: 'Nome',
